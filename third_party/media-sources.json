@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "profile": "local-audio-gpl3-lame",
+  "sources": [
+    {
+      "name": "ffmpeg",
+      "version": "8.1.1",
+      "filename": "ffmpeg-239f2c733d.tar.gz",
+      "url": "https://codeload.github.com/FFmpeg/FFmpeg/tar.gz/239f2c733d",
+      "sha256": "11b3259addbc18cfb5cf4b198a746e8bd34828419f4284a3d00599abaadd0244",
+      "bytes": 16870430,
+      "license": "GPL-3.0-or-later",
+      "revision": "239f2c733de417201d7ad3b3b8b0d9b63285b2b1"
+    },
+    {
+      "name": "lame",
+      "version": "3.100",
+      "filename": "lame-3.100.tar.gz",
+      "url": "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
+      "sha256": "ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e",
+      "bytes": 1524133,
+      "license": "LGPL-2.0-or-later"
+    },
+    {
+      "name": "mingw-w64",
+      "version": "commit a3d93999ef0521681d45e445c39964a7af0f593f",
+      "filename": "mingw-w64-a3d93999.tar.gz",
+      "url": "https://codeload.github.com/mingw-w64/mingw-w64/tar.gz/a3d93999ef0521681d45e445c39964a7af0f593f",
+      "sha256": "c08776647d5744df7f6ae2bf131da4c9c0fd9934f7a11ecc85cd5692d4b01b62",
+      "bytes": 15823524,
+      "license": "see MinGW runtime license",
+      "revision": "a3d93999ef0521681d45e445c39964a7af0f593f"
+    },
+    {
+      "name": "llvm",
+      "version": "23.1.3",
+      "filename": "llvm-project-23.1.3.src.tar.xz",
+      "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-23.1.3/llvm-project-23.1.3.src.tar.xz",
+      "sha256": "c44186a7762ed28954be72e5ff6df9808e0779d4f1bf014ecc4e7e211d31ee34",
+      "bytes": 179220548,
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "revision": "0d261d1ca552c95a8f007e061c787ac7132fbcbc"
+    },
+    {
+      "name": "llvm-mingw-build",
+      "version": "20261006",
+      "filename": "llvm-mingw-20261006-source.tar.gz",
+      "url": "https://codeload.github.com/mstorsjo/llvm-mingw/tar.gz/refs/tags/20261006",
+      "sha256": "c2420cffca252535942318334c28aa79514671f6df2e02b403f8198d39e0ba31",
+      "bytes": 71034,
+      "license": "see upstream LICENSE",
+      "revision": "e1878a59f8bf3e1a73afe28f1b83168b1d029ed8"
+    }
+  ],
+  "toolchain": {
+    "version": "20261006",
+    "filename": "llvm-mingw-20261006-ucrt-x86_64.zip",
+    "folder": "llvm-mingw-20261006-ucrt-x86_64",
+    "url": "https://github.com/mstorsjo/llvm-mingw/releases/download/20261006/llvm-mingw-20261006-ucrt-x86_64.zip",
+    "sha256": "317492c456aa27ee607a5919f1d2d38dcdc1112516a24d0bf4b00d078f52d17a",
+    "clang": "23.1.3",
+    "make": "4.4.1"
+  },
+  "patches": [
+    {
+      "path": "patches/ffmpeg-native-make.patch",
+      "sha256": "1c22cbe6f1557a00407d2fa6f6562e2bbd0a16c1048a778495ead8856848b5c5",
+      "purpose": "Use GNU Make file generation for the archive response file to avoid the native Windows command line limit."
+    }
+  ]
+}

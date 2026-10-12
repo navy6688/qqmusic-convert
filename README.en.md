@@ -36,7 +36,7 @@ The desktop interface is currently in Simplified Chinese.
 | Operating system | Windows 10 / 11, x64 |
 | Encrypted audio | QQ Music desktop must be running and signed in, with access to the requested resource |
 | Unencrypted audio | A QQ Music session is not required |
-| Storage | About 92 MB for the EXE; about 203 MB for the initial tool cache, plus temporary audio and output space |
+| Storage | About 23 MB for the EXE and 31 MB for the initial media cache, plus temporary audio and output space |
 
 The executable is not commercially code-signed. Check its source and SHA-256 if Windows shows
 an unknown-publisher prompt; do not disable security software. QQ Music updates may change
@@ -95,8 +95,10 @@ filing an issue, and do not attach real audio. Skipping an existing output does 
 
 ## Build from source
 
-Build on Windows with Go 1.26+ and static Windows x64 FFmpeg / FFprobe executables.
-FFmpeg must provide `libmp3lame`. These are build dependencies, not extra runtime requirements.
+Build on Windows with Go 1.26+ and Git for Windows including Bash.
+The default build downloads hash-pinned sources and the LLVM-MinGW toolchain, then builds
+FFmpeg / FFprobe and LAME. These are build dependencies, not extra runtime requirements.
+The first source build needs substantial downloads and compilation time.
 
 From the project root:
 
@@ -104,7 +106,7 @@ From the project root:
 & ".\scripts\build.ps1"
 ```
 
-If the tools are not on PATH, provide their locations. The following paths are examples:
+To deliberately use another media build, provide its paths and retain its matching source/license materials. These paths are examples:
 
 ```powershell
 & ".\scripts\build.ps1" `
@@ -154,6 +156,8 @@ internal/media/       Tool cache and media processes
 internal/convert/     Planning, conversion, verification, and publication
 internal/desktop/     Native Win32 interface
 docs/                 Publishing and maintenance documentation
+third_party/          Pinned media source, toolchain, and patch hashes
+patches/              FFmpeg Windows build patch
 licenses/             Original third-party license texts
 scripts/              Build scripts
 ```
@@ -178,16 +182,17 @@ The original Go application code, documentation, and original logo use the [MIT 
 Third-party work retains its own terms; see [NOTICE.md](NOTICE.md) and [licensing scope](docs/LICENSING.en.md).
 The project MIT license does not relicense bundled FFmpeg or other third-party work.
 
-[Distribution materials](docs/DISTRIBUTION.md) are prepared, but the current static FFmpeg build's
-full external dependency sources and build chain are still unresolved. Public binary release
-is pending those materials. The downloaded FFmpeg upstream archive is not the complete
-Corresponding Source for that static build.
+The media tools are built from pinned sources, with LAME as the only enabled external
+audio encoder library. The release provides the Windows program, application sources, and
+media Corresponding Source including the build patch, scripts, and version records.
+See [distribution materials](docs/DISTRIBUTION.md) and [media build instructions](docs/MEDIA_BUILD.md).
 
 | Component | Attribution and license |
 |---|---|
 | QMC2 / TEA algorithms | QM Unlock, pinned commit `c41a3e9affe67e01048d64fdd160a0002c913a30`, MIT |
 | Go and golang.org/x/sys | BSD; original texts are retained in `licenses/` |
-| Bundled FFmpeg / FFprobe | Currently Gyan.dev FFmpeg 8.1.1 essentials, with GPLv3 enabled |
+| Bundled FFmpeg / FFprobe | FFmpeg 8.1.1 built from pinned sources, GPLv3 or later |
+| LAME 3.100 | LGPLv2 or later, linked statically in FFmpeg |
 
 Third-party notices are also embedded in the EXE and can be exported using the help button.
 Public distribution of an EXE containing FFmpeg must meet the applicable requirements for

@@ -34,7 +34,7 @@ musicex V1 加密音频及常见普通音频转换为 MP3，并在输出前完�
 | 系统 | Windows 10 / 11，x64 |
 | 加密音频 | 桌面版 QQ 音乐正在运行并已登录，当前账号有权访问相应资源 |
 | 普通音频 | 不需要 QQ 音乐登录状态 |
-| 存储 | EXE 约 92 MB；首次转换会展开约 203 MB 组件缓存，另需音频临时文件和输出空间 |
+| 存储 | EXE 约 23 MB；首次转换展开约 31 MB 组件缓存，另需音频临时文件和输出空间 |
 
 程序未进行商业代码签名。如果系统提示未知发布者，请核对下载来源和 SHA-256，
 不要关闭安全软件来运行程序。客户端更新可能影响自动密钥获取，不保证兼容所有版本。
@@ -81,8 +81,9 @@ musicex V1 加密音频及常见普通音频转换为 MP3，并在输出前完�
 
 ## 从源码构建
 
-构建在 Windows 上进行，需要 Go 1.26+，以及静态 Windows x64 FFmpeg / FFprobe。
-FFmpeg 构建须支持 `libmp3lame`。这些是开发依赖，不是最终 EXE 的额外运行依赖。
+构建在 Windows 上进行，需要 Go 1.26+ 和包含 Bash 的 Git for Windows。
+默认脚本核对固定源码与 LLVM-MinGW 工具链的哈希，自行构建 FFmpeg / FFprobe 和 LAME。
+这些是开发依赖，不是最终 EXE 的额外运行依赖。首次构建需要较多下载和编译时间。
 
 在项目根目录执行：
 
@@ -90,7 +91,7 @@ FFmpeg 构建须支持 `libmp3lame`。这些是开发依赖，不是最终 EXE �
 & ".\scripts\build.ps1"
 ```
 
-如果组件不在 PATH 中，可指定路径。以下目录仅为示例：
+如果明确使用其他媒体构建，可指定路径并自行落实相应源码与许可。以下目录仅为示例：
 
 ```powershell
 & ".\scripts\build.ps1" `
@@ -140,6 +141,8 @@ internal/media/       组件缓存和转码进程
 internal/convert/     目录规划、转换、校验与发布
 internal/desktop/     原生 Win32 界面
 docs/                 项目发布与维护说明
+third_party/          媒体源码、工具链和补丁哈希清单
+patches/              FFmpeg Windows 构建补丁
 licenses/             第三方许可原文
 scripts/              构建脚本
 ```
@@ -162,14 +165,16 @@ GitHub 同步步骤和发布前的文件检查见 [GitHub 同步指南](docs/GIT
 第三方组件保留各自许可，范围与版权见 [NOTICE.md](NOTICE.md) 和 [许可证说明](docs/LICENSING.md)。
 项目 MIT 不会将内嵌 FFmpeg 或其他第三方组件重新许可为 MIT。
 
-[EXE 发行材料](docs/DISTRIBUTION.md) 已整理；当前静态 FFmpeg 的外部依赖对应源码和完整构建链
-尚未齐备，公开二进制发行状态为待补齐。不能把已下载的 FFmpeg 自身源码当作完整对应源码。
+本版媒体组件从固定源码构建，唯一启用的外部编码库为 LAME。
+发行页同时提供 Windows 程序、应用源码与媒体组件对应源码，包含构建补丁、脚本和版本记录。
+详细范围见 [EXE 发行材料](docs/DISTRIBUTION.md) 和 [媒体组件构建](docs/MEDIA_BUILD.md)。
 
 | 组件 | 来源与许可 |
 |---|---|
 | QMC2 / TEA 算法 | QM Unlock，固定提交 `c41a3e9affe67e01048d64fdd160a0002c913a30`，MIT |
 | Go、golang.org/x/sys | BSD，原文见 `licenses/` |
-| 内嵌 FFmpeg / FFprobe | 当前为 Gyan.dev FFmpeg 8.1.1 essentials 构建，启用了 GPLv3 |
+| 内嵌 FFmpeg / FFprobe | 固定源码自构建的 FFmpeg 8.1.1，GPLv3 或后续版本 |
+| LAME 3.100 | LGPLv2 或后续版本，静态链接在 FFmpeg 中 |
 
 第三方许可与来源说明也嵌入 EXE，可通过“使用说明”按钮取得本地文本。
 公开分发内嵌 FFmpeg 的 EXE 时，须按适用许可提供对应源码、构建资料和声明；

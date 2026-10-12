@@ -1,58 +1,30 @@
-# Project licensing
+# Licensing scope
 
-[简体中文](LICENSING.md)
+Original Go application work, build scripts, documentation, and the original logo
+use the root MIT LICENSE. Third-party works keep their original terms.
+The project MIT license does not relicense the bundled FFmpeg executables.
 
-## Original work: MIT
+| Work | Terms |
+|---|---|
+| Original application and docs | MIT |
+| QMC2 / TEA port and derived vectors | Original QM Unlock MIT notice retained |
+| Go and golang.org/x/sys | BSD |
+| rsrc build tool | MIT |
+| Bundled FFmpeg / FFprobe | GPL version 3 or later |
+| Linked LAME 3.100 library | GNU Library GPL version 2 or later; combined FFmpeg build distributed under GPLv3 or later |
+| LLVM compiler runtime | Apache 2.0 with LLVM Exceptions and retained notices |
+| MinGW runtime and headers | Original texts retained in licenses/ |
+| FFmpeg build patch | Supplied under FFmpeg's GPL terms |
 
-The original Go application code, documentation, and original logo use the MIT
-License in the root LICENSE file. The notice names "qqmusic-convert contributors";
-each contributor retains the rights they actually hold. It does not claim ownership
-of third-party work or authorize material a contributor cannot license.
+The media tools are built from pinned sources. Original FFmpeg and LAME sources,
+the Windows build patch, scripts, toolchain versions, and runtime sources are
+provided alongside the versioned binary. NOTICE.md, third_party/media-sources.json,
+and the release manifest record the actual scope and hashes.
 
-MIT permits use, modification, copying, distribution, and commercial use, subject
-to preserving its copyright and license notice. It includes a warranty disclaimer.
-The English LICENSE is the operative text; this explanation adds no noncommercial
-or other restrictions to it.
+The extracted media executables run as separate processes. This description does
+not replace legal assessment of a distribution combination. Retain all applicable
+notices and do not describe the entire EXE as MIT-only.
 
-The software license grants no rights to music recordings. The intended use with
-local audio a user is entitled to access is not an extra restriction on the MIT license.
-
-## Third-party work retains its own terms
-
-| Work | License | Retained text |
-|---|---|---|
-| QM Unlock-derived QMC2 / TEA and algorithm vectors | MIT, with original attribution | licenses/QMUnlock-MIT.txt |
-| Go runtime and standard library | BSD | licenses/Go-BSD.txt |
-| golang.org/x/sys v0.49.0 | BSD | licenses/xsys-BSD.txt |
-| rsrc v0.10.2 build tool | MIT | licenses/rsrc-MIT.txt |
-| Current bundled FFmpeg / FFprobe | Publisher states GPLv3; linked libraries also require review | licenses/FFmpeg-GPL.txt |
-
-NOTICE.md records sources, versions, copyrights, and component scope. The root MIT
-license does not relicense FFmpeg or any other third-party work. Keeping a GPL text
-does not by itself establish that every distribution requirement has been met.
-
-FFmpeg runs as a separate process, while its compressed binaries are embedded in
-the EXE. This records the implementation, not a blanket legal determination that
-all combinations are aggregates or that all original application code automatically
-becomes GPL-licensed.
-
-## Current public-release boundary
-
-- Original source and MIT texts are prepared. Preserve third-party notices when sharing source.
-- The current executable's materials form a local preview, not a public-binary-release clearance.
-- The publisher-declared FFmpeg source revision has been obtained. It does not cover
-  all sources for the statically linked dependency set.
-- Exact dependency sources, patches, build scripts, toolchain records, and notices
-  still require verification.
-
-See [EXE distribution materials](DISTRIBUTION.md) for concrete outstanding items.
-Do not publish an unfulfilled source offer or describe the package as fully license-compliant.
-
-## Official references
-
-- MIT text: https://opensource.org/license/mit
-- FFmpeg guidance: https://ffmpeg.org/legal.html
-- GPLv3 text: https://www.gnu.org/licenses/gpl-3.0.html
-
-Requirements depend on the actual licenses and distributed combination. Obtain a
-qualified review where the interpretation of that combination is uncertain.
+The network distribution uses version-specific source access alongside binaries
+under the applicable GPLv3 section 6 option. No separate written source-offer route
+is promised. No rights to recordings, trademarks, or account resources are granted.

@@ -15,9 +15,8 @@ $env:Path = [Environment]::ExpandEnvironmentVariables(
     [Environment]::GetEnvironmentVariable('Path', 'User'))
 if (-not (Get-Command go -ErrorAction SilentlyContinue)) { throw 'Go 1.26 or newer is required.' }
 if (-not $FFmpeg) {
-    $command = Get-Command ffmpeg -ErrorAction SilentlyContinue
-    if (-not $command) { throw 'Pass -FFmpeg with the absolute path to a static FFmpeg executable.' }
-    $FFmpeg = $command.Source
+    & (Join-Path $PSScriptRoot 'build-media.ps1')
+    $FFmpeg = Join-Path $root 'build\release-media\bin\ffmpeg.exe'
 }
 $FFmpeg = (Resolve-Path -LiteralPath $FFmpeg).Path
 if (-not $FFprobe) { $FFprobe = Join-Path (Split-Path -Parent $FFmpeg) 'ffprobe.exe' }

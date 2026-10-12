@@ -1,37 +1,40 @@
-# Source availability — local release preview
-
-**Public binary release status: NOT_READY_FOR_PUBLIC_BINARY_RELEASE**
-
-The original qqmusic-convert source is prepared in the accompanying application
-source archive. It includes the Go implementation, public synthetic test vectors,
-build scripts, MIT LICENSE, NOTICE, and retained third-party notices. It contains
-no real audio, login tokens, song keys, or embedded third-party executable archives.
+# Version-specific source availability
 
 Application source repository: https://github.com/navy6688/qqmusic-convert
-This repository covers the application source; it does not supply the missing
-Corresponding Source for the complete bundled static FFmpeg build.
+Release: v1.1.0.
 
-The publisher-declared upstream FFmpeg source was obtained at:
-239f2c733de417201d7ad3b3b8b0d9b63285b2b1.
-The archive includes FFmpeg's own configure script, release metadata, and GPL text.
-This is ONLY the FFmpeg upstream source, not the full Corresponding Source for the
-publisher's statically linked FFmpeg/FFprobe executables.
+The release provides application sources and the matching
+`qqmusic-convert-v1.1.0-corresponding-source.zip` next to the Windows binary.
+The source bundle includes:
 
-Still unresolved:
-- Exact source revisions and archives for every linked external dependency.
-- Dependencies with unspecified versions, including openal-soft recorded as "latest".
-- Transitive dependency and runtime-library scope.
-- Publisher patches and complete dependency/build/link/install scripts.
-- A sufficient toolchain/build environment record and dependency license notices.
-- An actual, maintained public release location for complete corresponding materials.
+- The original Go application, build scripts, public synthetic test vectors,
+  original MIT LICENSE, NOTICE, and third-party license texts.
+- Original FFmpeg source at 239f2c733de417201d7ad3b3b8b0d9b63285b2b1.
+- Original LAME 3.100 source, the only enabled external audio encoder library.
+- The FFmpeg Windows archive-response-file patch and the actual build scripts.
+- Exact LLVM 23.1.3 and MinGW-w64 sources, plus the pinned LLVM-MinGW build scripts.
+- Version, configuration, source/input hashes, and media binary hashes.
 
-The application source repository is listed above. No binary release page or
-written source-offer commitment is claimed. This preview is not a claim that GPL
-distribution conditions are met.
+Archives are pinned by third_party/media-sources.json. Build instructions are in
+docs/MEDIA_BUILD.md. The pinned compiler binary can be downloaded free from its
+recorded official release URL and verified by its recorded SHA-256. General
+build tools are not installed as end-user runtime dependencies.
 
-For a future network binary release, place clear version-specific source-access
-instructions alongside the executable and implement the applicable GPLv3 section
-6 option. Publishing a homepage URL or one upstream archive alone does not
-establish completeness. Do not publish an unfulfilled written source offer.
+The executables import only Windows system DLLs. No Windows DLL is redistributed
+inside the release. Runtime notices remain included; the exact compiler/runtime
+sources are supplied in addition to the FFmpeg and LAME application sources.
 
-See docs/DISTRIBUTION.md, docs/LICENSING.md, NOTICE.md, and the retained GPL text.
+This release no longer embeds the previous general-purpose Gyan binary whose
+full external dependency build materials were not available. The source bundle
+is matched to the media profile actually built for this version, not that old
+binary. The original source archives remain intact; the applied build patch is
+provided separately.
+
+Version-specific binary and source access is supplied together using the
+applicable GPLv3 section 6 network distribution option. No separate written
+source-offer commitment is asserted. Retain the source assets while distributing
+the matching binary, and keep notices with redistributed copies.
+
+No real audio, account data, login tokens, song keys, or personal computer paths
+are provided as public source fixtures. This inventory records the materials
+provided and does not replace legal assessment of any other distribution.

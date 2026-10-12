@@ -1,0 +1,11 @@
+--- a/ffbuild/library.mak
++++ b/ffbuild/library.mak
+@@ -36,7 +36,7 @@
+ $(SUBDIR)$(LIBNAME): $(OBJS) $(STLIBOBJS)
+ 	$(RM) $@
+ ifeq ($(RESPONSE_FILES),yes)
+-	$(Q)echo $^ > $@.objs
++	$(file >$@.objs,$^)
+ 	$(AR) $(ARFLAGS) $(AR_O) @$@.objs
+ else
+ 	$(AR) $(ARFLAGS) $(AR_O) $^
